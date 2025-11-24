@@ -1,0 +1,22 @@
+.titulo-confirmacao {
+    font-size: 3rem;
+    font-weight: 700;
+    background: linear-gradient(to right, #ffa686, #fd875c, #FF4600);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.info-confirmacao {
+    font-size: 1.25rem;
+    color: #5c5c5c;
+    width: 75%;
+    padding: 1.5rem;
+    text-align: center;
+    font-weight: 400;
+}
+
+#icone-confirmacao {
+    font-size: 6rem;
+    color: #ff5f25;
+}
