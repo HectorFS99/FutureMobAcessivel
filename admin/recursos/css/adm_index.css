@@ -1,0 +1,35 @@
+/********** Botões de gerenciamento **********/
+.opcoes-gerenciamento {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.opc-geren {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    height: 150px;
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        text-decoration: none !important;
+    transition: all .225s;
+    color: whitesmoke;
+    margin: 1rem;
+    margin-left: 0;
+    text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
+}
+
+.opc-geren > .fa-solid {
+    font-size: 3rem;
+    margin: 1rem;
+}
+
+.opc-geren:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+}
