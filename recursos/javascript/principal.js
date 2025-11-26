@@ -37,7 +37,6 @@ document.addEventListener("DOMContentLoaded", function() {
         grupo.classList.toggle("oculto");
     });
     
-    //Seleciona o elemento <body> para que possamos alterar seu estilo.
     var corpoDaPagina = document.querySelector("body");
 
     var aumentarTexto = document.getElementById("aumentar-texto");
@@ -45,37 +44,62 @@ document.addEventListener("DOMContentLoaded", function() {
     var alternarContraste = document.getElementById("alternar-contraste");
     var pretoBranco = document.getElementById("preto-e-branco");
 
-    // O padrão de tamanho equivale a 100% do valor definido no style
-    var fontSize = 100;
+    const TAGS = [
+        "h1", "h3", "h4", "h5", "h6", 
+        "p", "span", "a", "li", "ul", "label", "strong", "small", "b",
+        "button", "select", "option", "input", "textarea"
+    ];
 
-    // Valor percentual de 10% que irá aumentar ou diminuir do padrão da fonte
-    var qntAumentarDiminuir = 10;
+    let escala = 1;
+    let passo = 0.1; // 10%
+
+    function guardarTamanho() {
+        TAGS.forEach(tag => {
+            document.querySelectorAll(tag).forEach(elemento => {
+                if (!elemento.dataset.tamanhoInicial) {
+                    let estilo = window.getComputedStyle(elemento).fontSize;
+                    elemento.dataset.tamanhoInicial = parseFloat(estilo);
+                }
+            });
+        });
+    }
+
+    function aplicarEscala() {
+        TAGS.forEach(tag => {
+            document.querySelectorAll(tag).forEach(elemento => {
+                let base = parseFloat(elemento.dataset.tamanhoInicial);
+                elemento.style.fontSize = (base * escala) + "px";
+            });
+        });
+    }
 
     // Evento de click para aumentar a fonte
-    aumentarTexto.addEventListener("click", function (event) {
-        fontSize = fontSize + qntAumentarDiminuir;
-        corpoDaPagina.style.fontSize = fontSize + "%";
+    aumentarTexto.addEventListener("click", function () {
+        guardarTamanho();
+        escala += passo;
+        aplicarEscala();
     });
-    
+
     // Evento de click para diminuir a fonte
-    diminuirTexto.addEventListener("click", function (event) {
-        fontSize = fontSize - qntAumentarDiminuir;
-        corpoDaPagina.style.fontSize = fontSize + "%";
+    diminuirTexto.addEventListener("click", function () {
+        guardarTamanho();
+        escala -= passo;
+        aplicarEscala();
     });
 
     // Evento de click para alternar o contraste
-    alternarContraste.addEventListener("click", function (event) {
-        corpoDaPagina.style.filter = corpoDaPagina.style.filter === "invert(100%)" ? "none" : "invert(100%)";
+    alternarContraste.addEventListener("click", function () {
+        corpoDaPagina.classList.toggle("alto-contraste");
     });
 
     // Evento de click para alternar para preto e branco
-    pretoBranco.addEventListener("click", function (event) {
-        corpoDaPagina.style.filter = corpoDaPagina.style.filter === "grayscale(100%)" ? "none" : "grayscale(100%)";
+    pretoBranco.addEventListener("click", function () {
+        corpoDaPagina.classList.toggle("preto-branco");
     });
-
-    // V LIBRA
-    new window.VLibras.Widget('https://vlibras.gov.br/app');    
 });
+
+// V LIBRA
+new window.VLibras.Widget('https://vlibras.gov.br/app');   
 
 /***** SweetAlert2. *****/
 // Popups
